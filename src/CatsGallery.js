@@ -1,7 +1,10 @@
 import React, { Component } from "react";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import CatsItem from './CatsItem.js';
 import "./CatsGallery.css";
 
-const catsMock = [
+/*const catsMock = [
   {
     id: "1",
     name: "Robi",
@@ -38,7 +41,7 @@ const catsMock = [
     gender: "Female",
     picturePath: "http://placekitten.com/200/250"
   }
-];
+];*/
 
 class CatsGallery extends Component {
   constructor(props) {
@@ -47,26 +50,34 @@ class CatsGallery extends Component {
   }
 
   componentDidMount() {
-    // /!\ Warning !
-    // Here is a data example with harcoded cats. You must fetch data from the endpoint provided in the README.md instead.
-    // Tip: you can use the fetch api (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
-    this.setState({
-      cats: catsMock
-    });
+    fetch('https://europe-west1-matters-test.cloudfunctions.net/getCats')
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          cats: data
+        });
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
   }
+
 
   render() {
     const { cats } = this.state;
     return (
       <div className="gallery">
-        <h1 className="title">Cats gallery</h1>
-        <ul className="list">
-          {cats.map(cat => (
-            <li key={cat.id} className="listItem">
-              <img src={cat.picturePath} alt={cat.name} />
-            </li>
-          ))}
-        </ul>
+        <Container fluid>
+          <h1 className="title">Cats gallery</h1>
+          <Row>
+            {cats.map(cat => (
+              <CatsItem key={cat.id} cat={cat}/>
+              /*<li key={cat.id} className="listItem">
+                <img src={cat.picturePath} alt={cat.name} />
+              </li>*/
+            ))}
+          </Row>
+        </Container>
       </div>
     );
   }
