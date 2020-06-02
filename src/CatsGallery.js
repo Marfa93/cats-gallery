@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import CatsItem from './CatsItem.js';
 import "./CatsGallery.css";
@@ -67,17 +66,11 @@ class CatsGallery extends Component {
     const { cats } = this.state;
     return (
       <div className="gallery">
-        <Container fluid>
-          <h1 className="title">Cats gallery</h1>
-          <Row>
-            {cats.map(cat => (
-              <CatsItem key={cat.id} cat={cat}/>
-              /*<li key={cat.id} className="listItem">
-                <img src={cat.picturePath} alt={cat.name} />
-              </li>*/
-            ))}
-          </Row>
-        </Container>
+        <Row>
+          {cats.map(cat => (
+            <CatsItem key={cat.id} cat={cat}/>
+          ))}
+        </Row>
       </div>
     );
   }

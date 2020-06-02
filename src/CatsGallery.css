@@ -1,4 +1,4 @@
-.gallery {
+.gallery, .details {
   padding: 40px;
 }
 
@@ -12,4 +12,14 @@
 
 .listItem {
   display: inline-block;
+}
+
+.card {
+  padding: 0.5em;
+  margin-bottom: 2em;
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
 }
