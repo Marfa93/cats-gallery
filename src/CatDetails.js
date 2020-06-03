@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 import { NavLink } from 'react-router-dom';
+import CatInfos from './CatInfos.js';
 
 class CatDetails extends Component {
   constructor(props) {
@@ -23,6 +24,7 @@ class CatDetails extends Component {
         });
       })
       .catch((error) => {
+        alert("Request error. Please try again");
         console.error('Error:', error);
       });
   }
@@ -67,7 +69,7 @@ class CatDetails extends Component {
         </Col>
 
         <Col sm={6}>
-          <h1>Name : {cat.name}</h1>
+          <CatInfos cat={cat} />
         </Col>
       </>
     );
